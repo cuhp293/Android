@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!--show result field-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:gravity="right"
+        android:paddingTop="100dp"
+        android:paddingRight="10dp"
+        android:text="0"
+        android:textSize="80sp"
+        android:background="@color/btn_num"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:background="@color/white">
+
+        <!--1st row-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="CE"
+                android:textSize="20dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="C"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="BS"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="/"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <!--2nd row-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="7"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="8"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="9"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="*"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <!--3rd row-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="4"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="5"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="6"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="-"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <!--4th row-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="1"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="2"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="3"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="+"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <!--5th row-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="+/-"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_num"
+                android:text="0"
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="."
+                android:textSize="20dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10px"
+                android:layout_marginRight="10px"
+                android:layout_marginBottom="10px"
+                android:layout_weight="1"
+                android:background="@color/btn_cal"
+                android:text="="
+                android:textSize="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
