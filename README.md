@@ -15,3 +15,10 @@ In this assignment, you will create the user interface for a calculator applicat
 
 - **Linear Layout Implementation:** Located in the `Cal_Linear` folder. This version exclusively utilizes linear layout elements.
 - **Constraint Layout Implementation:** Located in the `Cal_Constraint` folder. This version is designed using constraint layout elements only.
+
+---
+
+## Week 5 Assignment: Calculator Application
+
+This is a Calculator application with an interface similar to the attached image. It performs basic calculations using integer data types.
+The application was developed from the "Cal_Linear" folder as part of the assignment for week 4.
