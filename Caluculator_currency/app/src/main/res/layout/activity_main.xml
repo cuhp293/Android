@@ -1,61 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/amountEditText"
-        android:layout_width="0dp"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Amount"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toStartOf="@+id/sourceCurrencySpinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Currency Converter"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="16dp" />
 
-    <Spinner
-        android:id="@+id/sourceCurrencySpinner"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/amountEditText"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/convertedAmountEditText"
-        android:layout_width="0dp"
+        <EditText
+            android:id="@+id/etSourceAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Enter amount"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinnerSourceCurrency"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Converted Amount"
-        android:inputType="numberDecimal"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        app:layout_constraintEnd_toStartOf="@+id/targetCurrencySpinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amountEditText" />
+        android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/targetCurrencySpinner"
-        android:layout_width="0dp"
+        <EditText
+            android:id="@+id/etTargetAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Converted amount"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:textSize="20sp"
+            android:enabled="false" />
+
+        <Spinner
+            android:id="@+id/spinnerTargetCurrency"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvExchangeRate"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/convertedAmountEditText"
-        app:layout_constraintTop_toBottomOf="@+id/sourceCurrencySpinner" />
+        android:gravity="center"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:text="1 USD = 23,500 VND" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

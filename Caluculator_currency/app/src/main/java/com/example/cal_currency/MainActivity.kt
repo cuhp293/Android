@@ -9,96 +9,104 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var etSourceAmount: EditText
+    private lateinit var spinnerSourceCurrency: Spinner
+    private lateinit var etTargetAmount: EditText
+    private lateinit var spinnerTargetCurrency: Spinner
+    private lateinit var tvExchangeRate: TextView
 
-    private val exchangeRates = mapOf(
+    private val currencyRates = mapOf(
         "USD" to 1.0,
-        "EUR" to 0.85,
-        "GBP" to 0.72,
-        "JPY" to 110.15,
-        "VND" to 23200.0
+        "EUR" to 0.9,
+        "JPY" to 134.7,
+        "GBP" to 0.8,
+        "AUD" to 1.5,
+        "CAD" to 1.3,
+        "CHF" to 0.9,
+        "CNY" to 6.9,
+        "HKD" to 7.8,
+        "NZD" to 1.6,
+        "VND" to 23000.0
     )
 
-    private var isSourceEditing = true
+    private var sourceCurrency = "USD"
+    private var targetCurrency = "USD"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val amountEditText = findViewById<EditText>(R.id.amountEditText)
-        val convertedAmountEditText = findViewById<EditText>(R.id.convertedAmountEditText)
-        val sourceCurrencySpinner = findViewById<Spinner>(R.id.sourceCurrencySpinner)
-        val targetCurrencySpinner = findViewById<Spinner>(R.id.targetCurrencySpinner)
+        etSourceAmount = findViewById(R.id.etSourceAmount)
+        spinnerSourceCurrency = findViewById(R.id.spinnerSourceCurrency)
+        etTargetAmount = findViewById(R.id.etTargetAmount)
+        spinnerTargetCurrency = findViewById(R.id.spinnerTargetCurrency)
+        tvExchangeRate = findViewById(R.id.tvExchangeRate)
 
-        // Set up source currency spinner
-        val sourceCurrencies = exchangeRates.keys.toList()
-        val sourceCurrencyAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sourceCurrencies)
-        sourceCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        sourceCurrencySpinner.adapter = sourceCurrencyAdapter
+        setupCurrencySpinners()
+        setupEditTextListeners()
+    }
 
-        // Set up target currency spinner
-        val targetCurrencies = exchangeRates.keys.toList()
-        val targetCurrencyAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, targetCurrencies)
-        targetCurrencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        targetCurrencySpinner.adapter = targetCurrencyAdapter
+    private fun setupCurrencySpinners() {
+        val currencies = currencyRates.keys.toList()
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, currencies)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        // Set up text change listeners
-        amountEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                updateConvertedAmount(amountEditText, convertedAmountEditText, sourceCurrencySpinner, targetCurrencySpinner)
+        spinnerSourceCurrency.adapter = adapter
+        spinnerTargetCurrency.adapter = adapter
+
+        spinnerSourceCurrency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                sourceCurrency = currencies[position]
+                updateExchangeRate()
             }
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
-        amountEditText.setOnClickListener {
-            isSourceEditing = true
-            updateConvertedAmount(amountEditText, convertedAmountEditText, sourceCurrencySpinner, targetCurrencySpinner)
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        convertedAmountEditText.setOnClickListener {
-            isSourceEditing = false
-            updateConvertedAmount(amountEditText, convertedAmountEditText, sourceCurrencySpinner, targetCurrencySpinner)
-        }
-
-        sourceCurrencySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (isSourceEditing) {
-                    updateConvertedAmount(amountEditText, convertedAmountEditText, sourceCurrencySpinner, targetCurrencySpinner)
-                }
+        spinnerTargetCurrency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                targetCurrency = currencies[position]
+                updateExchangeRate()
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
 
-        targetCurrencySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (!isSourceEditing) {
-                    updateConvertedAmount(amountEditText, convertedAmountEditText, sourceCurrencySpinner, targetCurrencySpinner)
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
 
-    private fun updateConvertedAmount(
-        amountEditText: EditText,
-        convertedAmountEditText: EditText,
-        sourceCurrencySpinner: Spinner,
-        targetCurrencySpinner: Spinner
-    ) {
-        val amount = amountEditText.text.toString().toDoubleOrNull() ?: 0.0
-        val sourceCurrency = sourceCurrencySpinner.selectedItem.toString()
-        val targetCurrency = targetCurrencySpinner.selectedItem.toString()
+    private fun setupEditTextListeners() {
+        etSourceAmount.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                updateExchangeRate()
+            }
+        })
 
-        val sourceRate = exchangeRates[sourceCurrency] ?: 1.0
-        val targetRate = exchangeRates[targetCurrency] ?: 1.0
-
-        val convertedAmount = (amount * (targetRate / sourceRate)).toDouble()
-        if (isSourceEditing) {
-            convertedAmountEditText.setText(convertedAmount.toString())
-        } else {
-            amountEditText.setText(convertedAmount.toString())
+        etSourceAmount.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                spinnerSourceCurrency.performClick()
+            }
         }
+
+        etTargetAmount.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                spinnerTargetCurrency.performClick()
+            }
+        }
+    }
+
+    private fun updateExchangeRate() {
+        val sourceAmount = etSourceAmount.text.toString().toDoubleOrNull() ?: 0.0
+        val sourceRate = currencyRates[sourceCurrency] ?: 1.0
+        val targetRate = currencyRates[targetCurrency] ?: 1.0
+
+        val targetAmount = sourceAmount * (targetRate / sourceRate)
+        etTargetAmount.setText(targetAmount.toString())
+
+        val exchangeRateText = "1 $sourceCurrency = ${targetRate / sourceRate} $targetCurrency"
+        tvExchangeRate.text = exchangeRateText
     }
 }
