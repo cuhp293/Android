@@ -25,6 +25,9 @@
         android:hint="Nhập vào 1 số nguyên dương n"
         android:inputType="number"
         android:textSize="24dp"
+        android:padding="12dp"
+        android:layout_margin="8dp"
+        android:background="@android:drawable/editbox_background"
         />
 
     <RadioGroup
