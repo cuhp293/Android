@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cbMusic: CheckBox
     private lateinit var cbAgreement: CheckBox
     private lateinit var btnSubmit: Button
-    private lateinit var addressHelper: AddressHelper
+//    private lateinit var addressHelper: AddressHelper
 
     private var selectedDate: String? = null
 
