@@ -7,10 +7,6 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
-import com.example.studentmanger.R
-import com.example.studentmanger.StudentModel
-import com.example.studentmanger.StudentListFragmentDirections
 
 class StudentListFragment : Fragment() {
     private lateinit var studentAdapter: ArrayAdapter<StudentModel>
@@ -72,12 +68,21 @@ class StudentListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Lắng nghe sinh viên mới từ AddStudentFragment
+        // Lắng nghe sinh viên mới
         findNavController().currentBackStackEntry
             ?.savedStateHandle
             ?.getLiveData<StudentModel>("new_student")
             ?.observe(viewLifecycleOwner) { newStudent ->
                 students.add(newStudent)
+                studentAdapter.notifyDataSetChanged()
+            }
+
+        // Lắng nghe sinh viên đã chỉnh sửa
+        findNavController().currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Pair<Int, StudentModel>>("updated_student")
+            ?.observe(viewLifecycleOwner) { (position, updatedStudent) ->
+                students[position] = updatedStudent
                 studentAdapter.notifyDataSetChanged()
             }
     }
@@ -86,16 +91,6 @@ class StudentListFragment : Fragment() {
         inflater.inflate(R.menu.main_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.menu_add_new -> {
-//                findNavController().navigate(R.id.action_studentListFragment_to_addStudentFragment)
-//                true
-//            }
-//            else -> item.onNavDestinationSelected(findNavController()) || super.onOptionsItemSelected(item)
-//        }
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

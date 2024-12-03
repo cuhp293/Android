@@ -23,33 +23,6 @@ class AddStudentFragment : Fragment() {
         val editName: EditText = view.findViewById(R.id.edit_student_name)
         val editId: EditText = view.findViewById(R.id.edit_student_id)
 
-//        btnSave.setOnClickListener {
-//            val name = editName.text.toString().trim()
-//            val id = editId.text.toString().trim()
-//
-//            if (name.isNotEmpty() && id.isNotEmpty()) {
-//                // Lưu sinh viên mới vào danh sách toàn cục hoặc gửi về màn hình danh sách
-//                val action = AddStudentFragmentDirections
-//                    .actionAddStudentFragmentToStudentListFragment()
-//                findNavController().navigate(action)
-//            } else {
-//                if (name.isEmpty()) editName.error = "Vui lòng nhập tên"
-//                if (id.isEmpty()) editId.error = "Vui lòng nhập mã sinh viên"
-//            }
-//        }
-
-//        btnSave.setOnClickListener {
-//            val name = editName.text.toString().trim()
-//            val id = editId.text.toString().trim()
-//
-//            if (name.isNotEmpty() && id.isNotEmpty()) {
-//                // Thay vì dùng AddStudentFragmentDirections
-//                findNavController().navigate(R.id.studentListFragment)
-//            } else {
-//                if (name.isEmpty()) editName.error = "Vui lòng nhập tên"
-//                if (id.isEmpty()) editId.error = "Vui lòng nhập mã sinh viên"
-//            }
-//        }
         btnSave.setOnClickListener {
             val name = editName.text.toString().trim()
             val id = editId.text.toString().trim()
@@ -67,8 +40,8 @@ class AddStudentFragment : Fragment() {
                 // Quay về màn hình danh sách
                 navController.navigateUp()
             } else {
-                if (name.isEmpty()) editName.error = "Vui lòng nhập tên"
-                if (id.isEmpty()) editId.error = "Vui lòng nhập mã sinh viên"
+                if (name.isEmpty()) editName.error = "Please enter StudentName"
+                if (id.isEmpty()) editId.error = "Please enter StudentID"
             }
         }
 

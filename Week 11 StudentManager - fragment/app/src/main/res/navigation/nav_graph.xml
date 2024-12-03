@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/studentListFragment"
         android:name="com.example.studentmanger.StudentListFragment"
-        android:label="Danh Sách Sinh Viên">
+        android:label="Student List">
         <action
             android:id="@+id/action_studentListFragment_to_addStudentFragment"
             app:destination="@id/addStudentFragment" />
@@ -26,12 +26,12 @@
     <fragment
         android:id="@+id/addStudentFragment"
         android:name="com.example.studentmanger.AddStudentFragment"
-        android:label="Thêm Sinh Viên" />
+        android:label="Add Student" />
 
     <fragment
         android:id="@+id/editStudentFragment"
         android:name="com.example.studentmanger.EditStudentFragment"
-        android:label="Sửa Thông Tin Sinh Viên">
+        android:label="Edit Student">
         <argument
             android:name="student"
             app:argType="com.example.studentmanger.StudentModel" />

@@ -27,33 +27,28 @@ class EditStudentFragment : Fragment() {
 
         // Hiển thị thông tin sinh viên được chọn
         val student = args.student
+        val position = args.position
         nameEdit.setText(student.studentName)
         idEdit.setText(student.studentId)
 
-//        btnSave.setOnClickListener {
-//            val name = nameEdit.text.toString().trim()
-//            val id = idEdit.text.toString().trim()
-//
-//            if (name.isNotEmpty() && id.isNotEmpty()) {
-//                // Quay về màn hình danh sách
-//                val action = EditStudentFragmentDirections
-//                    .actionEditStudentFragmentToStudentListFragment()
-//                findNavController().navigate(action)
-//            } else {
-//                if (name.isEmpty()) nameEdit.error = "Vui lòng nhập tên"
-//                if (id.isEmpty()) idEdit.error = "Vui lòng nhập mã sinh viên"
-//            }
-//        }
         btnSave.setOnClickListener {
             val name = nameEdit.text.toString().trim()
             val id = idEdit.text.toString().trim()
 
             if (name.isNotEmpty() && id.isNotEmpty()) {
-                // Thay vì dùng EditStudentFragmentDirections
-                findNavController().navigate(R.id.studentListFragment)
+                // Lưu sinh viên đã chỉnh sửa
+                val updatedStudent = StudentModel(name, id)
+
+                // Truyền sinh viên đã sửa và vị trí về StudentListFragment
+                findNavController().previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.set("updated_student", Pair(position, updatedStudent))
+
+                // Quay về màn hình danh sách
+                findNavController().navigateUp()
             } else {
-                if (name.isEmpty()) nameEdit.error = "Vui lòng nhập tên"
-                if (id.isEmpty()) idEdit.error = "Vui lòng nhập mã sinh viên"
+                if (name.isEmpty()) nameEdit.error = "Please enter StudentName"
+                if (id.isEmpty()) idEdit.error = "Please enter StudentID"
             }
         }
 
